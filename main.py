@@ -1,9 +1,9 @@
-from flask import Flask
-app = Flask(__name__)
+from flask import Flask, request
+app = Flask(__name__, static_url_path='/static')
 
 @app.route('/')
-def hello_world():
-    return 'Hello, World!'
+def root():
+    return app.send_static_file('test.html')
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+  app.run(host='0.0.0.0', port=5000, debug=True)
