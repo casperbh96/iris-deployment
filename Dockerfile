@@ -7,7 +7,7 @@ WORKDIR /app
 RUN pip install -r req.txt
 
 ADD ./trained_models ./trained_models
-ADD ./static /static
+ADD ./static ./static
 ADD ./main.py main.py
 
 EXPOSE 5000
