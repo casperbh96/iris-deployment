@@ -1,6 +1,7 @@
 #!/bin/bash
 reinstall_docker_nginx=false
 configure_nginx=false
+kill_docker_images=false
 
 LISTEN=0.0.0.0:80
 SERVER_NAME=localhost
@@ -80,7 +81,10 @@ fi
 #### Run all images
 ####
 
-docker kill $(docker ps -q)
+if [ "$kill_docker_images" = true ]
+then
+	docker kill $(docker ps -q)
+fi
 
 # get length of an array
 n_images=${#images[@]}
@@ -90,7 +94,7 @@ for (( i=0; i<${n_images}; i++ ));
 do
     docker build -t "${image_name[$i]}:${image_version[$i]}" .
     ID="$(docker images | grep ${image_name[$i]}| head -n 1 | awk '{print $3}')"
-	docker run -d -p "${ports[$i]}" "${ID}"
+	docker run -d -p "${ports[$i]} ${ID}"
 done
 
 service nginx restart
