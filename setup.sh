@@ -93,9 +93,9 @@ n_images=${#image_name[@]}
 for (( i=0; i<${n_images}; i++ ));
 do
     docker build -t "${image_name[$i]}:${image_version[$i]}" .
-    ID="$(docker images | grep ${image_name[$i]}| head -n 1 | awk '{print $3}')"
+    ID="$(docker images | grep ${image_name[$i]} | head -n 1 | awk '{print $3}')"
 	echo "${ID}"
-	docker run -d -p "${ports[$i]} ${ID}"
+	docker run -d -p ${ports[$i]} ${ID}
 done
 
 service nginx restart
