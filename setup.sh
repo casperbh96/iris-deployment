@@ -74,11 +74,6 @@ then
 		LINE_NUMBER=$(($LINE_NUMBER + 4))
 	done
 fi
-####
-#### Login to docker
-####
-
-docker login
 
 ####
 #### Run all images
