@@ -1,6 +1,6 @@
 #!/bin/bash
-reinstall_docker_nginx=false
-configure_nginx=false
+reinstall_docker_nginx=true
+configure_nginx=true
 kill_docker_images=false
 
 LISTEN=0.0.0.0:80
