@@ -3,12 +3,12 @@ reinstall_docker_nginx=true
 configure_nginx=true
 kill_docker_images=false
 
-LISTEN=0.0.0.0:80
+LISTEN=64.227.72.137:80
 SERVER_NAME=localhost
 
 # Arrays
 declare -a LOCATIONS=("/")
-declare -a PROXIES=("http://localhost:5000")
+declare -a PROXIES=("http://localhost:5000/")
 declare -a image_name=("iris")
 declare -a image_version=("1.0")
 declare -a ports=("5000:5000")
@@ -94,7 +94,6 @@ for (( i=0; i<${n_images}; i++ ));
 do
     docker build -t "${image_name[$i]}:${image_version[$i]}" .
     ID="$(docker images | grep ${image_name[$i]} | head -n 1 | awk '{print $3}')"
-	echo "${ID}"
 	docker run -d -p ${ports[$i]} ${ID}
 done
 
