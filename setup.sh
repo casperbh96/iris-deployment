@@ -92,6 +92,7 @@ n_images=${#images[@]}
 # use for loop to read all values and indexes
 for (( i=0; i<${image_name}; i++ ));
 do
+	echo "hello world!!"
     docker build -t "${image_name[$i]}:${image_version[$i]}" .
     ID="$(docker images | grep ${image_name[$i]}| head -n 1 | awk '{print $3}')"
 	docker run -d -p "${ports[$i]} ${ID}"
