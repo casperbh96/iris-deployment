@@ -28,4 +28,11 @@ var petal_length = $('#petal_length').slider()
 
 var petal_width = $('#petal_width').slider()
 					.on('slide', change4)
-					.data('slider');
+                    .data('slider');
+                    
+$(function() {
+    $('#output1').text($('#sepal_length').attr("data-slider-value"));
+    $('#output2').text($('#sepal_width').attr("data-slider-value"));
+    $('#output3').text($('#petal_length').attr("data-slider-value"));
+    $('#output4').text($('#petal_width').attr("data-slider-value"));
+});
