@@ -1,6 +1,6 @@
 #!/bin/bash
-reinstall_docker_nginx=true
-configure_nginx=true
+reinstall_docker_nginx=false
+configure_nginx=false
 
 LISTEN=0.0.0.0:80
 SERVER_NAME=localhost
@@ -87,6 +87,7 @@ n_images=${#images[@]}
 # use for loop to read all values and indexes
 for (( i=0; i<${n_images}; i++ ));
 do
+    echo "docker build -t "${images[$i]}" ."
     docker build -t "${images[$i]}" .
     ID="$(docker images | grep ${images[$i]} | head -n 1 | awk '{print $3}')"
 	docker run -d -p "${ports[$i]}" "${ID}"
