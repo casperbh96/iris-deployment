@@ -11,7 +11,7 @@ declare -a LOCATIONS=("/")
 declare -a PROXIES=("http://localhost:5000")
 declare -a image_name=("iris")
 declare -a image_version=("1.0")
-declare -a ports=("5000:5000")
+declare -a ports=("5000:80")
 
 #-------------------------------------------------
 
