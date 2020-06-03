@@ -36,3 +36,46 @@ $(function() {
     $('#output3').text($('#petal_length').attr("data-slider-value"));
     $('#output4').text($('#petal_width').attr("data-slider-value"));
 });
+
+$("#predict-form").submit(function(e) {
+    e.preventDefault();
+});
+
+$('.btn.btn-primary').click(function(){
+    predict_iris();
+});
+
+function ajax(url, type, data, sfunc, efunc) {
+    $.ajax({
+        url: url,
+        type: type,
+        contentType: "application/json",
+        data: data, 
+        success: sfunc, 
+        error: efunc
+    });
+}
+
+function predict_iris() {
+    data = JSON.stringify({
+        'sepal length (cm)': parseFloat($('#output1').text()),
+        'sepal width (cm)': parseFloat($('#output2').text()),
+        'petal length (cm)': parseFloat($('#output3').text()),
+        'petal width (cm)': parseFloat($('#output4').text())
+    });
+
+    ajax('/predict', 'POST', data,
+        function(response){
+            output = '';
+
+            if (response == 0) output += 'Iris Setosa';
+            else if (response == 1) output += 'Iris Versicolour';
+            else if (response == 2) output += 'Iris Virginica';
+
+            $('#prediction').text('Output: ' + output);
+        },
+        function(error){
+            $('#prediction').text('Output: ' + error);
+        }
+      )
+}
